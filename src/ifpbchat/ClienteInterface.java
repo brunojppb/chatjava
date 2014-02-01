@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package models;
+package ifpbchat;
 
 /**
  *
@@ -22,12 +22,10 @@ public interface ClienteInterface extends Remote{
 	public void setNome(String nome) throws RemoteException;
 	
 	public List<String> getMensagensPrivadas() throws RemoteException;
-	
-	public void setMensagensPrivadas(List<String> mensagensPrivadas) throws RemoteException;
-	
-	public void receberMensagemPrivada(String msg) throws RemoteException;
         
         public void setClientesLogados(List<String> nomes) throws RemoteException;
         
         public void setDelegate(InterfaceController delegate) throws RemoteException;
+        
+        public void receberMensagem(String msg) throws RemoteException;
 }

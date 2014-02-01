@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package models;
+package ifpbchat;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -16,4 +16,5 @@ import java.util.List;
  */
 public interface InterfaceController extends Remote{
     public void atualizarContatos(List<String> nomes) throws RemoteException;
+    public void atualizarMensagens(String mensagem) throws RemoteException;
 }

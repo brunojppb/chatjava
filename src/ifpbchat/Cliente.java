@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package models;
+package ifpbchat;
 
 /**
  *
@@ -47,9 +47,9 @@ public class Cliente extends UnicastRemoteObject implements ClienteInterface{
 	public void setMensagensPrivadas(List<String> mensagensPrivadas) throws RemoteException{
 		this.mensagensPrivadas = mensagensPrivadas;
 	}
-	
-	public void receberMensagemPrivada(String msg) throws RemoteException{
-		this.mensagensPrivadas.add(msg);
+        
+        public void receberMensagem(String msg) throws RemoteException{
+		this.delegate.atualizarMensagens(msg);
 	}
         
         public void setClientesLogados(List<String> nomes) throws RemoteException{

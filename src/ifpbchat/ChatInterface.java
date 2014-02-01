@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package models;
+package ifpbchat;
 
 /**
  *
@@ -17,8 +17,8 @@ import java.util.List;
 
 public interface ChatInterface extends Remote{
 	public String registrarCliente(String cli) throws RemoteException;
-	public String enviarMensagemPrivada(String remetente, String destino, String mensagem) throws RemoteException;
-	public String enviarMensagemPublica(String remetente, String mensagem) throws RemoteException;
+	public void enviarMensagemPrivada(String remetente, String destino, String mensagem) throws RemoteException;
+	public void enviarMensagemPublica(String remetente, String mensagem) throws RemoteException;
 	public List<String> getMensagensPublicas() throws RemoteException;
         public List<String> getClientesCadastrados() throws RemoteException;
 }

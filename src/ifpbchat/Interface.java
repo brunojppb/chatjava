@@ -4,9 +4,7 @@
  * and open the template in the editor.
  */
 
-package pkginterface;
-
-import telas.TelaPrincipal;
+package ifpbchat;
 
 /**
  *

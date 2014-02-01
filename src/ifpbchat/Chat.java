@@ -1,5 +1,5 @@
 
-package models;
+package ifpbchat;
 
 import java.rmi.Naming;
 import java.rmi.RemoteException;
@@ -40,27 +40,22 @@ public class Chat extends UnicastRemoteObject implements ChatInterface{
 	}
 
 	@Override
-	public String enviarMensagemPrivada(String remetente, String destino, String mensagem) throws RemoteException{
+	public void enviarMensagemPrivada(String remetente, String destino, String mensagem) throws RemoteException{
 		if(!this.clientes.isEmpty()){
 			for(ClienteInterface c : clientes){
 				if(c.getNome().equals(destino)){
-					c.receberMensagemPrivada(remetente + " falou: " + mensagem);
-					return "Mensagem enviada";
+					c.receberMensagem(remetente + ": " + mensagem);
 				}
 					
 			}
 		}
-		return "Usuario nao encontrado";
 	}
 
 	@Override
-	public String enviarMensagemPublica(String remetente, String mensagem) throws RemoteException{
+	public void enviarMensagemPublica(String remetente, String mensagem) throws RemoteException{
 		if(!this.clientes.isEmpty()){
-			this.mensagensPublicas.add(remetente + " falou: " + mensagem);
-			return "Mensagem enviada";
-		}
-		else{
-			return "Nao ha clientes cadastrados";
+			for(ClienteInterface c : clientes)
+                            c.receberMensagem(remetente + ": " + mensagem);
 		}
 	}
 	

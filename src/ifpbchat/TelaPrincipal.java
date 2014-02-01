@@ -4,16 +4,16 @@
  * and open the template in the editor.
  */
 
-package telas;
+package ifpbchat;
 
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.util.List;
 import javax.swing.JOptionPane;
-import models.ChatInterface;
-import models.Cliente;
-import models.ClienteInterface;
-import models.InterfaceController;
+import ifpbchat.ChatInterface;
+import ifpbchat.Cliente;
+import ifpbchat.ClienteInterface;
+import ifpbchat.InterfaceController;
 
 /**
  *
@@ -29,6 +29,13 @@ public class TelaPrincipal extends javax.swing.JFrame implements InterfaceContro
         System.out.println("ENTROU");
         this.listUsuarios.setListData(nomes.toArray());
     }
+    
+    @Override
+    public void atualizarMensagens(String mensagem) throws RemoteException {
+        this.txtAreaMensagens.append(mensagem + "\n");
+    }
+    
+    
     
     /**
      * Creates new form TelaPrincipal
@@ -225,7 +232,12 @@ public class TelaPrincipal extends javax.swing.JFrame implements InterfaceContro
     }//GEN-LAST:event_txtNomeActionPerformed
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-        txtAreaMensagens.append(txtMensagem.getText() + "\n");
+        //txtAreaMensagens.append(txtMensagem.getText() + "\n");
+        try {
+            this.chat.enviarMensagemPublica(cliente.getNome(), txtMensagem.getText());   
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Mensagem nao enviada");
+        }
         txtMensagem.setText("");
     }//GEN-LAST:event_btnEnviarActionPerformed
 
@@ -287,4 +299,5 @@ public class TelaPrincipal extends javax.swing.JFrame implements InterfaceContro
     private javax.swing.JTextField txtPorta;
     private javax.swing.JTextField txtServidor;
     // End of variables declaration//GEN-END:variables
+
 }
