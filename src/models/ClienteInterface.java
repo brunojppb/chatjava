@@ -26,4 +26,8 @@ public interface ClienteInterface extends Remote{
 	public void setMensagensPrivadas(List<String> mensagensPrivadas) throws RemoteException;
 	
 	public void receberMensagemPrivada(String msg) throws RemoteException;
+        
+        public void setClientesLogados(List<String> nomes) throws RemoteException;
+        
+        public void setDelegate(InterfaceController delegate) throws RemoteException;
 }

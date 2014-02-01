@@ -24,6 +24,8 @@ public class Cliente extends UnicastRemoteObject implements ClienteInterface{
 	private static final long serialVersionUID = 1L;
 	private String nome;
 	private List<String>mensagensPrivadas;
+        private List<String>clientesLogados;
+        private InterfaceController delegate;
 
 	public Cliente(String nome) throws RemoteException{
 		this.nome = nome;
@@ -50,4 +52,12 @@ public class Cliente extends UnicastRemoteObject implements ClienteInterface{
 		this.mensagensPrivadas.add(msg);
 	}
         
+        public void setClientesLogados(List<String> nomes) throws RemoteException{
+            this.clientesLogados = nomes;
+            this.delegate.atualizarContatos(nomes);
+        }
+        
+        public void setDelegate(InterfaceController delegate) throws RemoteException{
+            this.delegate = delegate;
+        }
 }

@@ -7,20 +7,29 @@
 package telas;
 
 import java.rmi.Naming;
+import java.rmi.RemoteException;
+import java.util.List;
 import javax.swing.JOptionPane;
 import models.ChatInterface;
 import models.Cliente;
 import models.ClienteInterface;
+import models.InterfaceController;
 
 /**
  *
  * @author brunopaulino
  */
-public class TelaPrincipal extends javax.swing.JFrame {
+public class TelaPrincipal extends javax.swing.JFrame implements InterfaceController{
     
     public ChatInterface chat;
     public ClienteInterface cliente;
 
+    @Override
+    public void atualizarContatos(List<String> nomes) throws RemoteException{
+        System.out.println("ENTROU");
+        this.listUsuarios.setListData(nomes.toArray());
+    }
+    
     /**
      * Creates new form TelaPrincipal
      */
@@ -61,7 +70,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jScrollPane1.setViewportView(txtAreaMensagens);
 
         listUsuarios.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            String[] strings = { "aguardando login" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
@@ -195,9 +204,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 return;
             }
              cliente = new Cliente(nome);
+             cliente.setDelegate(this);
              Naming.bind(cliente.getNome(), cliente);
+             this.chat.registrarCliente(cliente.getNome());
              JOptionPane.showMessageDialog(null, "Cliente Cadastrado");
              btnLogar.setEnabled(false);
+             txtNome.setEnabled(false);
+             txtServidor.setEnabled(false);
+             txtPorta.setEnabled(false);
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage());
             System.out.println("Objeto Chat nao encontrado");

@@ -20,5 +20,5 @@ public interface ChatInterface extends Remote{
 	public String enviarMensagemPrivada(String remetente, String destino, String mensagem) throws RemoteException;
 	public String enviarMensagemPublica(String remetente, String mensagem) throws RemoteException;
 	public List<String> getMensagensPublicas() throws RemoteException;
-        public List<ClienteInterface> getClientesCadastrados() throws RemoteException;
+        public List<String> getClientesCadastrados() throws RemoteException;
 }

@@ -30,6 +30,9 @@ public class Chat extends UnicastRemoteObject implements ChatInterface{
 					}
 				}
 			 this.clientes.add(c);
+                         for(ClienteInterface cl : clientes){
+                             cl.setClientesLogados(this.getClientesCadastrados());
+                         }
 		} catch (Exception e) {
 			System.out.println("Erro: :( " + e.getMessage());
 		}
@@ -65,11 +68,12 @@ public class Chat extends UnicastRemoteObject implements ChatInterface{
 		return this.mensagensPublicas;
 	}
         
-        public List<ClienteInterface> getClientesCadastrados() throws RemoteException{
-            return this.clientes;
+        public List<String> getClientesCadastrados() throws RemoteException{
+            List<String> nomes = new ArrayList<String>();
+            for(ClienteInterface c : clientes){
+                nomes.add(c.getNome());
+            }
+            return nomes;
         }
-
-
-	
 	
 }
